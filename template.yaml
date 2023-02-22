@@ -45,11 +45,11 @@ stages:
             - task: Maven@3
               inputs:
                 mavenPOMFile: 'pom.xml'
-                goals: ${{ parameter.defaultpipeline }}
+                goals: "${{ parameter.defaultpipeline }}"
                 publishJUnitResults: yes
                 testResultsFiles: '**/surefire-reports/TEST-*.xml'
-                javaHomeOption: ${{ parameter.version }}
-                jdkDirectory: ${{ parameter.Directory }}  
-                mavenDirectory: ${{ parameter.mavenDirectory }}
+                javaHomeOption: "${{ parameter.version }}"
+                jdkDirectory: "${{ parameter.Directory }} " 
+                mavenDirectory: "${{ parameter.mavenDirectory }}"
     
 
