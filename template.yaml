@@ -20,7 +20,7 @@ parameters:
       - '1.11'
       - '1.17'
   - name: Directory
-    displayname: javaDirectory
+    displayName: javaDirectory
     type: string
     default: /usr/lib/jvm/java-17-openjdk-amd64
     values: 
@@ -28,7 +28,7 @@ parameters:
       - /usr/lib/jvm/java-11-openjdk-amd64
       - /usr/lib/jvm/java-17-openjdk-amd64
   - name: mavenDirectory
-    displayname: mavenDirectory
+    displayName: mavenDirectory
     type: string
     default: /opt/apache-maven-3.8.7/bin/mvn 
     values:
