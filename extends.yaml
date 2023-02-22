@@ -5,4 +5,4 @@ trigger:
   - main
 
 extends:
-   templete: ./maven/parameter.yaml
+   templete: ./springpetclinic/extends.yaml
