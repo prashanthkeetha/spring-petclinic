@@ -61,6 +61,8 @@ stages:
               buildType: 'current'
               downloadType: 'single'
               downloadPath: '$(System.ArtifactsDirectory)'
+          - script: ansible-playbook -i host spcplaybook.yaml
+
 
 
 
