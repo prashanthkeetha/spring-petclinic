@@ -51,5 +51,22 @@ stages:
               javaHomeOption: "${{ parameters.version }}"
               jdkDirectory: "${{ parameters.Directory }} " 
               mavenDirectory: "${{ parameters.mavenDirectory }}"
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: '$(Build.Repository.LocalPath)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
+          - task: DownloadBuildArtifacts@1
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              downloadPath: '$(System.ArtifactsDirectory)'
+
+
+
+
+
+
+
 
 
