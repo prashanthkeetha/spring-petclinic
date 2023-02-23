@@ -39,17 +39,17 @@ parameters:
 stages:
   - stage: package
     displayName: buildingmavenpackage
-      jobs:
-        - job: packagejob
-          steps:
-            - task: Maven@3
-              inputs:
-                mavenPOMFile: 'pom.xml'
-                goals: "${{ parameter.defaultpipeline }}"
-                publishJUnitResults: yes
-                testResultsFiles: '**/surefire-reports/TEST-*.xml'
-                javaHomeOption: "${{ parameter.version }}"
-                jdkDirectory: "${{ parameter.Directory }} " 
-                mavenDirectory: "${{ parameter.mavenDirectory }}"
-    
+    jobs:
+      - job: packagejob
+        steps:
+          - task: Maven@3
+            inputs:
+              mavenPOMFile: 'pom.xml'
+              goals: "${{ parameter.defaultpipeline }}"
+              publishJUnitResults: yes
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              javaHomeOption: "${{ parameter.version }}"
+              jdkDirectory: "${{ parameter.Directory }} " 
+              mavenDirectory: "${{ parameter.mavenDirectory }}"
+
 
