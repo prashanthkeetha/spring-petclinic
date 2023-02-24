@@ -30,7 +30,7 @@ parameters:
   - name: mavenDirectory
     displayName: mavenDirectory
     type: string
-    default: /opt/apache-maven-3.8.7/bin/mvn 
+    default: /opt/maven 
     values:
       - /opt/apache-maven-3.8.4/bin/mvn
       - /opt/apache-maven-3.8.7/bin/mvn
