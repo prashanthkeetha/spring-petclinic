@@ -19,7 +19,6 @@ parameters:
       - '1.8'
       - '1.11'
       - '1.17'
-      - 'path'
   - name: Directory
     displayName: javaDirectory
     type: string
@@ -31,10 +30,10 @@ parameters:
   - name: mavenDirectory
     displayName: mavenDirectory
     type: string
-    default: /opt/apache-maven-3.8.7/bin/mvn 
+    default: /opt/maven 
     values:
       - /opt/apache-maven-3.8.4/bin/mvn
-      - /opt/apache-maven-3.8.7/bin/mvn
+      - /opt/maven
       - /opt/apache-maven-3.9.0/bin/mvn
 
 stages:
@@ -50,12 +49,17 @@ stages:
               publishJUnitResults: yes
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               javaHomeOption: "${{ parameters.version }}"
+              jdkDirectory: "${{ parameters.Directory }}" 
+              mavenVersionOption: 'path'
               jdkDirectory: "${{ parameters.Directory }} " 
               mavenVersionOption: 'path'
               mavenDirectory: "${{ parameters.mavenDirectory }}"
         
           - script: aws s3 mb s3://springpetclinic22/    
           - script: aws s3 cp  '$(Build.Repository.LocalPath)/target/spring-petclinic-3.0.0-SNAPSHOT.jar' s3://springpetclinic22/ --acl public-read
+       
+
+
 
 
 
