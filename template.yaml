@@ -14,11 +14,12 @@ parameters:
   - name: version
     displayName: javaversion
     type: string
-    default: '1.17'
+    default: path
     values:
       - '1.8'
       - '1.11'
       - '1.17'
+      - 'path'
   - name: Directory
     displayName: javaDirectory
     type: string
@@ -50,13 +51,11 @@ stages:
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               javaHomeOption: "${{ parameters.version }}"
               jdkDirectory: "${{ parameters.Directory }} " 
+              mavenVersionOption: 'path'
               mavenDirectory: "${{ parameters.mavenDirectory }}"
         
-          - script: aws s3 mb s3://springpetclinic24
-          - script: aws s3 cp /home/ubuntu/myagent/_work/5/s/target/ s3://springpetclinic24 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --recursive
-            workingDirectory:
-            displayName: copying jar file 
-
+          - script: aws s3 mb s3://springpetclinic22/    
+          - script: aws s3 cp  '$(Build.Repository.LocalPath)/target/spring-petclinic-3.0.0-SNAPSHOT.jar' s3://springpetclinic22/ --acl public-read
 
 
 
