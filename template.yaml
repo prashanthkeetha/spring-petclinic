@@ -14,11 +14,11 @@ parameters:
   - name: version
     displayName: javaversion
     type: string
-    default: 'path'
+    default: path
     values:
       - '1.8'
       - '1.11'
-      - '1.17'
+      - 'path'
   - name: Directory
     displayName: javaDirectory
     type: string
