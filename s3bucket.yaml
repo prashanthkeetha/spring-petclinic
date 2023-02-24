@@ -1,9 +1,0 @@
-pool:
-  name: Default
-trigger:
-  - main
-steps:
-  - script: aws s3 mb s3://springpetclinic24
-  - script: aws s3 cp /home/ubuntu/myagent/_work/5/s/target/ s3://springpetclinic24 --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --recursive
-    workingDirectory:
-    displayName: copying jar file
