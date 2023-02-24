@@ -33,7 +33,7 @@ parameters:
     default: /opt/maven 
     values:
       - /opt/apache-maven-3.8.4/bin/mvn
-      - /opt/apache-maven-3.8.7/bin/mvn
+      - /opt/maven
       - /opt/apache-maven-3.9.0/bin/mvn
 
 stages:
