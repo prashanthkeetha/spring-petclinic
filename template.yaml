@@ -52,7 +52,7 @@ stages:
               jdkDirectory: "${{ parameters.Directory }} " 
               mavenDirectory: "${{ parameters.mavenDirectory }}"
         
-          - script: aws s3 mb s3://springpetclinic24
+       
 
 
 
