@@ -1,0 +1,37 @@
+pipeline {
+    agent {label 'spcdevelop'}
+    tools {
+        maven 'maven'
+    }
+        
+    stages {
+        stage ('VCS') {
+            steps {
+                git url: "https://github.com/spring-projects/spring-petclinic.git",
+                branch: "main"
+            }
+        }
+        stage ('sonar') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh 'mvn clean package sonar:sonar'                 
+
+                }
+
+            }
+        }
+        stage (package) {
+            steps { 
+                sh '''
+                 mvn compile
+                 ls
+                 mvn test
+                 ls
+                 mvn package
+                 ls
+                '''
+                
+            }
+        }
+     }
+}
