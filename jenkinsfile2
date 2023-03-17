@@ -1,0 +1,57 @@
+pipeline {
+    agent {label 'spcdevelop'}
+    stages{
+        stage('vcs') {
+            steps {
+                git url:'https://github.com/prashanthkeetha/spring-petclinic.git',
+                branch:'release'
+            }
+        }
+         stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "ARTIFACTORY_SERVER",
+                    url: 'https://prashanthkeetha.jfrog.io/artifactory',
+                    credentialsId: 'jfrog'
+                )
+            }
+         }
+
+        stage('jfrog') {
+            steps {
+                sh 'mvn clean install'
+                rtServer(
+                    id:'jfrog_SPC',
+                    url:'https://prashanthkeetha.jfrog.io/',
+                    credentialsId:'jfrog.SPC'
+                )
+                rtMavenDeployer (
+                    id:'Maven-deployer',
+                    serverId:'jfrog_SPC',
+                    releaseRepo:'libs-release',
+                    snapshotRepo:'libs-snapshot'
+                    
+                )
+                     rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ARTIFACTORY_SERVER",
+                    releaseRepo: 'libs-release',
+                    snapshotRepo: 'libs-snapshot'
+                )
+
+            }
+        }
+        stage('Build maven') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven',
+                    pom:'pom.xml',
+                    goals:'clean package',
+                    deployerId:'Maven-deployer'
+
+                )
+            }
+        }
+    }
+    
+}
